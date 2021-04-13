@@ -1,6 +1,8 @@
 package com.ismummy.restservices.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 //@Entity(name = "any name")
 //@Table(name = "any name", schema="databbase name")
@@ -11,9 +13,11 @@ public class User {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "USERNAME",length = 50,nullable = false, unique = true)
+    @NotEmpty(message = "Username is a mandatory field. Please provide username")
+    @Column(name = "USERNAME", length = 50, nullable = false, unique = true)
     private String username;
 
+    @Size(min = 2, message = "Firstname should have at least 2 characters")
     @Column(name = "FirstName", length = 50, nullable = false)
     private String firstname;
 
@@ -26,7 +30,7 @@ public class User {
     @Column(name = "Role", length = 50, nullable = false)
     private String role;
 
-    @Column(name = "SSN",length = 50,nullable = false, unique = true)
+    @Column(name = "SSN", length = 50, nullable = false, unique = true)
     private String ssn;
 
     public User() {
