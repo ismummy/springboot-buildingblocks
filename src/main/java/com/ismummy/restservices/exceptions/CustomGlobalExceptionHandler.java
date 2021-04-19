@@ -34,6 +34,12 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(details, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(UserNotFoundException.class)
+    public final ResponseEntity<Object> handleUserNameNotFoundException(UserNotFoundException ex, WebRequest request) {
+        CustomErrorDetails details = new CustomErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(details, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(ConstraintViolationException.class)
     public final ResponseEntity<Object> handleConstraintsViolationException(ConstraintViolationException ex, WebRequest request) {
         CustomErrorDetails details = new CustomErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
